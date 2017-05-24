@@ -1,11 +1,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const glob = require("glob");
-const SyncedFiles = glob.sync(__dirname + "/assets/**/*.*");
-
-console.info('SyncedFiles: ', SyncedFiles);
 
 module.exports = {
-  entry: SyncedFiles,
+  entry: [
+    './assets/javascripts/application.js',
+    './assets/stylesheets/application.scss'
+  ],
   output: {
     filename: 'js/bundle.js',
     path: __dirname + '/public/',
