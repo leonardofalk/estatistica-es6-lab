@@ -73,6 +73,8 @@
 "use strict";
 
 
+__webpack_require__(3);
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
@@ -86,6 +88,27 @@
 __webpack_require__(0);
 module.exports = __webpack_require__(1);
 
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function checkInput() {
+  var inputVals = this.value.split(/\s+/);
+
+  console.info(inputVals);
+
+  document.getElementById('saida').value = inputVals.join(' ');
+}
+
+var _arr = ['change', 'keypress', 'keydown', 'keyup'];
+for (var _i = 0; _i < _arr.length; _i++) {
+  var ev = _arr[_i];
+  document.getElementById('entrada').addEventListener(ev, checkInput);
+}
 
 /***/ })
 /******/ ]);

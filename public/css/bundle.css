@@ -5818,3 +5818,7 @@ img.parallax {
   display: block;
   width: 100%;
   max-width: 100%; }
+
+textarea {
+  max-width: 100%;
+  max-height: 100%; }
