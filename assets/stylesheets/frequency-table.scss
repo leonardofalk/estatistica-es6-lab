@@ -1,0 +1,11 @@
+.freq-table {
+  th, tbody tr:last-child > td {
+    border-top: 1px black solid !important;
+    border-bottom: 1px black solid !important;
+  }
+
+  th, td {
+    padding: 0 !important;
+    text-align: center;
+  }
+}

@@ -5,7 +5,7 @@
 ### Instalação
 
 ```bash
-yarn install # ou npm install
+npm install && npm install -g webpack
 webpack -w
 # abrir index.html na pasta root
 ```

@@ -17,14 +17,72 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-md-6">
 					<label for="entrada">Dados de Entrada:</label>
 					<textarea class="form-control" id="entrada" rows="6"></textarea>
+					<button class="btn btn-success btn-circle" id="example_run" style="margin-top: 5px;">Executar Exemplo</button>
 				</div>
-				<hr>
-				<div class="col-lg-12">
+				<div class="col-md-6">
 					<h3 class="text-center">Análise de Dados</h3>
-					<textarea id="saida" disabled rows="6"></textarea>
+					<dl class="dl-horizontal">
+						<dt>Conjunto:</dt>
+						<dd id="conjunto">0</dd>
+            <dt>Média Aritmética:</dt>
+            <dd id="media_aritmetica">0</dd>
+						<dt>Média Geométrica:</dt>
+						<dd id="media_geometrica">0</dd>
+						<dt>Mediana:</dt>
+						<dd id="mediana">0</dd>
+						<dt>Moda:</dt>
+						<dd id="moda">0</dd>
+					</dl>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<h3 class="text-center">Distribuição de Frequência</h3>
+
+					<table class="table freq-table">
+						<thead>
+							<tr>
+								<th>X<sub>i</sub></th>
+								<th>F<sub>i</sub></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>10</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>10</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>50</td>
+								<td>50</td>
+							</tr>
+					</table>
+				</div>
+				<div class="col-md-6">
+				  <ul class="nav nav-tabs nav-justified" role="tablist">
+				    <li role="presentation" class="active"><a href="#barchart" aria-controls="barchart" role="tab" data-toggle="tab">Histograma</a></li>
+				    <li role="presentation"><a href="#frequencia" aria-controls="frequencia" role="tab" data-toggle="tab">Polígono de Frequências</a></li>
+				    <li role="presentation"><a href="#ogiva" aria-controls="ogiva" role="tab" data-toggle="tab">Ogiva</a></li>
+				  </ul>
+
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active" id="barchart">
+							<canvas id="histograma" width="400" height="400"></canvas>
+						</div>
+				    <div role="tabpanel" class="tab-pane" id="frequencia">
+							<canvas id="poligono_frequencia" width="400" height="400"></canvas>
+						</div>
+				    <div role="tabpanel" class="tab-pane" id="ogiva">
+							<canvas id="ogiva_chart" width="400" height="400"></canvas>
+						</div>
+				  </div>
 				</div>
 			</div>
 		</div>

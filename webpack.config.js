@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -14,7 +15,6 @@ module.exports = {
     rules: [
       {
         test: /\.(scss|sass|css)$/i,
-        //exclude: /(node_modules|bower_components)/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
@@ -31,5 +31,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [new ExtractTextPlugin({filename: '/css/bundle.css', allChunks: true})]
+  plugins: [
+    new ExtractTextPlugin({filename: '/css/bundle.css', allChunks: true}),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    })
+  ]
 };

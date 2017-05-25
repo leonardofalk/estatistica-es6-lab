@@ -1,5 +1,8 @@
 $bootstrap-sass-asset-helper: true;
 
+@import "~bootswatch/flatly/variables";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootswatch/flatly/bootswatch";
 @import "parallax";
+@import "frequency-table";
 @import "styles";
