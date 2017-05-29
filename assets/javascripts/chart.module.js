@@ -1,44 +1,32 @@
 export function chartModule(vals) {
   createHistogram(vals);
-  createOgive(vals);
   createFrequencyPolygon(vals);
 }
 
 function createHistogram(vals) {
-  let container = document.getElementById('histograma');
+  let container = document.getElementById('histograma').getContext('2d');
+
+  console.info(vals);
 
   let chart = new Chart(container, {
     type: 'bar',
-    labels: vals.map(String),
-    data: vals,
-    backgroundColor: ['#3F4FFF'],
-    borderColor: ['#3F4FFF'],
-    borderWidth: 1,
+    data: {
+      labels: vals.map(String),
+      datasets: [{
+        data: vals,
+        backgroundColor: vals.map(function() { return '#3F4FFF' }),
+        borderWidth: 0,
+
+      }]
+    },
     options: {
       scales: {
         yAxes: [{
           ticks: {
             beginAtZero: true
           }
-        }]
-      }
-    }
-  });
-}
-
-function createOgive(vals) {
-  let container = document.getElementById('ogiva_chart');
-
-  let chart = new Chart(container, {
-    type: 'bar',
-    labels: vals.map(String),
-    data: vals,
-    backgroundColor: ['#3F4FFF'],
-    borderColor: ['#3F4FFF'],
-    borderWidth: 1,
-    options: {
-      scales: {
-        yAxes: [{
+        }],
+        xAxes: [{
           ticks: {
             beginAtZero: true
           }
@@ -52,15 +40,24 @@ function createFrequencyPolygon(vals) {
   let container = document.getElementById('poligono_frequencia');
 
   let chart = new Chart(container, {
-    type: 'bar',
-    labels: vals.map(String),
-    data: vals,
-    backgroundColor: ['#3F4FFF'],
-    borderColor: ['#3F4FFF'],
-    borderWidth: 1,
+    type: 'line',
+    data: {
+      labels: vals.map(String),
+      datasets: [{
+        data: vals,
+        backgroundColor: vals.map(function() { return '#3F4FFF' }),
+        borderWidth: 0,
+
+      }]
+    },
     options: {
       scales: {
         yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
           ticks: {
             beginAtZero: true
           }

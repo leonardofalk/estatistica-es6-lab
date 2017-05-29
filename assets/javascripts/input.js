@@ -2,25 +2,28 @@ import { infoModule } from './info.module';
 import { frequencyModule } from './frequency.module';
 import { chartModule } from './chart.module';
 
-for (let ev of ['change', 'keypress', 'keydown', 'keyup']) {
+for (let ev of ['change', 'keypress']) {
   document.getElementById('entrada').addEventListener(ev, function() {
-    let inputVals = this.value.trim().split(/\s+/).map(Number).sort((a, b) => {
+    let inputVals = this.value.trim().split(/\s+/).map(Number);
+    let sortedVals = inputVals.slice(0).sort((a, b) => {
       return parseInt(a || 0, 10) - parseInt(b || 0, 10);
     });
 
-    infoModule(inputVals);
-    // frequencyModule(inputVals);
+    frequencyModule(inputVals);
     chartModule(inputVals);
+    infoModule(sortedVals);
   });
 }
 
 document.getElementById('example_run').addEventListener('click', () => {
   document.getElementById('entrada').value = '';
-  let values = '5 10 13 2 8 25 17 20'.split(/\s+/);
-
-  for (let number of values) {
-    document.getElementById('entrada').value = document.getElementById('entrada').value + number + ' ';
+  let values = Array(Math.max(Math.floor(Math.random() * 10), 6));
+  for (let i = 0; i < values.length; i++) {
+    values[i] = Math.floor(Math.random() * 50);
   }
 
+  console.info(values);
+
+  document.getElementById('entrada').value = values.join(' ');
   document.getElementById('entrada').dispatchEvent(new CustomEvent('change'));
 });
