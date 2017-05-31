@@ -2,7 +2,7 @@ import { infoModule } from './info.module';
 import { frequencyModule } from './frequency.module';
 import { chartModule } from './chart.module';
 
-for (let ev of ['change', 'keypress']) {
+for (let ev of ['change', 'keyup', 'keydown']) {
   document.getElementById('entrada').addEventListener(ev, function() {
     let inputVals = this.value.trim().split(/\s+/).map(Number);
     let sortedVals = inputVals.slice(0).sort((a, b) => {
@@ -21,8 +21,6 @@ document.getElementById('example_run').addEventListener('click', () => {
   for (let i = 0; i < values.length; i++) {
     values[i] = Math.floor(Math.random() * 50);
   }
-
-  console.info(values);
 
   document.getElementById('entrada').value = values.join(' ');
   document.getElementById('entrada').dispatchEvent(new CustomEvent('change'));

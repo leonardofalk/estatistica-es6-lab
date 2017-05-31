@@ -28794,6 +28794,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chartModule = chartModule;
+var _chart1 = null,
+    _chart2 = null;
+
 function chartModule(vals) {
   createHistogram(vals);
   createFrequencyPolygon(vals);
@@ -28802,69 +28805,84 @@ function chartModule(vals) {
 function createHistogram(vals) {
   var container = document.getElementById('histograma').getContext('2d');
 
-  console.info(vals);
-
-  var chart = new Chart(container, {
-    type: 'bar',
-    data: {
-      labels: vals.map(String),
-      datasets: [{
-        data: vals,
-        backgroundColor: vals.map(function () {
-          return '#3F4FFF';
-        }),
-        borderWidth: 0
-
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }],
-        xAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
+  if (_chart1 === null) {
+    _chart1 = new Chart(container, {
+      type: 'bar',
+      data: {
+        labels: vals.map(String),
+        datasets: [{
+          data: vals,
+          backgroundColor: vals.map(function () {
+            return '#3F4FFF';
+          }),
+          borderWidth: 0
         }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              barPercentage: 1.0,
+              categoryPercentage: 1.0
+            }
+          }],
+          xAxes: [{
+            categoryPercentage: 1,
+            barPercentage: 1,
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
       }
-    }
-  });
+    });
+  } else {
+    _chart1.destroy();
+    _chart1 = null;
+    createHistogram(vals);
+  }
 }
 
 function createFrequencyPolygon(vals) {
   var container = document.getElementById('poligono_frequencia');
 
-  var chart = new Chart(container, {
-    type: 'line',
-    data: {
-      labels: vals.map(String),
-      datasets: [{
-        data: vals,
-        backgroundColor: vals.map(function () {
-          return '#3F4FFF';
-        }),
-        borderWidth: 0
-
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }],
-        xAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
+  if (_chart2 === null) {
+    _chart2 = new Chart(container, {
+      type: 'line',
+      data: {
+        labels: vals.map(String),
+        datasets: [{
+          data: vals,
+          borderColor: '#3F4FFF'
         }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
       }
-    }
-  });
+    });
+  } else {
+    _chart2.destroy();
+    _chart2 = null;
+    createFrequencyPolygon(vals);
+  }
 }
 
 /***/ }),
@@ -28890,7 +28908,7 @@ function frequencyModule(vals) {
       totald2 = 0;
 
   var tableInfo = vals.map(function (number) {
-    var d = Math.abs(media - number);
+    var d = Math.abs(number - media);
 
     total += number;
     totald += d;
@@ -29071,7 +29089,7 @@ var _frequency = __webpack_require__(122);
 
 var _chart = __webpack_require__(121);
 
-var _arr = ['change', 'keypress'];
+var _arr = ['change', 'keyup', 'keydown'];
 
 
 for (var _i = 0; _i < _arr.length; _i++) {
@@ -29094,8 +29112,6 @@ document.getElementById('example_run').addEventListener('click', function () {
   for (var i = 0; i < values.length; i++) {
     values[i] = Math.floor(Math.random() * 50);
   }
-
-  console.info(values);
 
   document.getElementById('entrada').value = values.join(' ');
   document.getElementById('entrada').dispatchEvent(new CustomEvent('change'));

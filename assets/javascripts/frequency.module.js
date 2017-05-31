@@ -5,7 +5,7 @@ export function frequencyModule(vals) {
   let total = 0, totald = 0, totald2 = 0;
 
   let tableInfo = vals.map((number) => {
-    let d = Math.abs(media - number);
+    let d = Math.abs(number - media);
 
     total += number;
     totald += d;
