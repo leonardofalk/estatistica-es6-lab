@@ -1,78 +1,79 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Estatística Aplicada a Computação - Trabalho I</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="public/css/bundle.css" rel="stylesheet">
-	</head>
+	<title>Estatística Aplicada a Computação - Trabalho I</title>
 
-	<body>
-		<nav class="navbar navbar-inverse">
-		   <p class="navbar-text">Estatística Aplicada à Computação - Trabalho II</p>
-			 <p class="navbar-text pull-right">Leonardo Carlotto/Leonardo Falk</p>
-		</nav>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<label for="entrada">Dados de Entrada:</label>
-					<textarea class="form-control" id="entrada" rows="6"></textarea>
-					<button class="btn btn-success btn-circle" id="example_run" style="margin-top: 5px;">Números Aleatórios</button>
-				</div>
-				<div class="col-md-6">
-					<h3 class="text-center">Análise de Dados</h3>
-					<dl class="dl-horizontal">
-						<dt>Conjunto:</dt>
-						<dd id="conjunto">0</dd>
-            <dt>Média Aritmética:</dt>
-            <dd id="media_aritmetica">0</dd>
-						<dt>Média Geométrica:</dt>
-						<dd id="media_geometrica">0</dd>
-						<dt>Mediana:</dt>
-						<dd id="mediana">0</dd>
-						<dt>Moda:</dt>
-						<dd id="moda">0</dd>
-					</dl>
-				</div>
+	<link href="public/css/bundle.css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<p class="navbar-text">Estatística Aplicada à Computação - Trabalho II</p>
+		<p class="navbar-text pull-right">Leonardo Carlotto/Leonardo Falk</p>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<label for="entrada">Dados de Entrada:</label>
+				<textarea class="form-control" id="entrada" rows="6"></textarea>
+				<button class="btn btn-success btn-circle" id="example_run" style="margin-top: 5px;">Números Aleatórios</button>
 			</div>
-			<hr>
-			<div class="row">
-				<div class="col-md-6">
-					<h3 class="text-center">Distribuição de Frequência</h3>
+			<div class="col-md-6">
+				<h3 class="text-center">Análise de Dados</h3>
+				<dl class="dl-horizontal">
+					<dt>Conjunto:</dt>
+					<dd id="conjunto">0</dd>
+					<dt>Média Aritmética:</dt>
+					<dd id="media_aritmetica">0</dd>
+					<dt>Média Geométrica:</dt>
+					<dd id="media_geometrica">0</dd>
+					<dt>Mediana:</dt>
+					<dd id="mediana">0</dd>
+					<dt>Moda:</dt>
+					<dd id="moda">0</dd>
+				</dl>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="text-center">Distribuição de Frequência</h3>
 
-					<table class="table freq-table">
-						<thead>
-							<tr>
-								<th>X<sub>i</sub></th>
-								<th>d</th>
-								<th>d²</th>
-							</tr>
-						</thead>
-						<tbody id="frequency_table">
-						</tbody>
-					</table>
-				</div>
-				<div class="col-md-6">
-				  <ul class="nav nav-tabs nav-justified" role="tablist">
-				    <li role="presentation" class="active"><a href="#barchart" aria-controls="barchart" role="tab" data-toggle="tab">Histograma</a></li>
-				    <li role="presentation"><a href="#frequencia" aria-controls="frequencia" role="tab" data-toggle="tab">Polígono de Frequências</a></li>
-				  </ul>
+				<table class="table freq-table">
+					<thead>
+						<tr>
+							<th>X<sub>i</sub></th>
+							<th>F<sub>i</sub></th>
+						</tr>
+					</thead>
+					<tbody id="frequency_table">
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<ul class="nav nav-tabs nav-justified" role="tablist">
+					<li role="presentation" class="active"><a href="#barchart" aria-controls="barchart" role="tab" data-toggle="tab">Histograma</a></li>
+					<li role="presentation"><a href="#frequencia" aria-controls="frequencia" role="tab" data-toggle="tab">Polígono de Frequências</a></li>
+				</ul>
 
-				  <div class="tab-content">
-				    <div role="tabpanel" class="tab-pane active" id="barchart">
-							<canvas id="histograma"></canvas>
-						</div>
-				    <div role="tabpanel" class="tab-pane" id="frequencia">
-							<canvas id="poligono_frequencia"></canvas>
-						</div>
-				  </div>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="barchart">
+						<canvas id="histograma"></canvas>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="frequencia">
+						<canvas id="poligono_frequencia"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 
-	<script src="public/js/bundle.js"></script>
+<script src="public/js/bundle.js"></script>
+
 </html>

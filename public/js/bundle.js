@@ -28906,18 +28906,30 @@ function frequencyModule(vals) {
   var total = 0,
       totald = 0,
       totald2 = 0;
+  var intervals = calcIntervals(vals);
 
-  var tableInfo = vals.map(function (number) {
-    var d = Math.abs(number - media);
+  var tableInfo = intervals.map(function (interval) {
+    var min = interval.min,
+        max = interval.max;
 
-    total += number;
-    totald += d;
-    totald2 += Math.pow(d, 2);
-
-    return { number: number, d: d, d2: Math.pow(d, 2) };
+    return {
+      interval: sprintf('%d ├── %d', min, max),
+      frequency: vals.map(function (n) {
+        return n <= max && n >= min ? 1 : 0;
+      }).reduce(function (a, b) {
+        return a + b;
+      })
+    };
   });
 
-  tableInfo.push({ number: total, d: totald, d2: totald2 });
+  tableInfo[tableInfo.length] = {
+    interval: '-',
+    frequency: tableInfo.map(function (num) {
+      return num.frequency;
+    }).reduce(function (a, b) {
+      return a + b;
+    })
+  };
 
   var tableHTML = [];
 
@@ -28929,7 +28941,7 @@ function frequencyModule(vals) {
     for (var _iterator = tableInfo[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var tableRow = _step.value;
 
-      tableHTML.push(sprintf('\n    <tr>\n      <td>%.2f</td>\n      <td>%.2f</td>\n      <td>%.2f</td>\n    </tr>\n    ', tableRow.number, tableRow.d, tableRow.d2));
+      tableHTML.push(sprintf('\n    <tr>\n      <td>%s</td>\n      <td>%d</td>\n    </tr>\n    ', tableRow.interval, tableRow.frequency));
     }
   } catch (err) {
     _didIteratorError = true;
@@ -28947,6 +28959,25 @@ function frequencyModule(vals) {
   }
 
   document.getElementById('frequency_table').innerHTML = tableHTML.join("\n");
+}
+
+function calcIntervals(vals) {
+  var intervals = vals.slice(0).sort(function (a, b) {
+    return parseInt(a || 0, 10) - parseInt(b || 0, 10);
+  });
+  var maxNum = intervals[intervals.length - 1];
+  var minNum = intervals[0];
+  var groupCount = Math.round(1 + 3.22 * Math.log10(intervals.length));
+  var groupLength = (maxNum - minNum) / groupCount;
+  var result = [],
+      n = minNum;
+
+  for (var i = 0; i < groupCount; i++) {
+    result[i] = { min: Math.round(n), max: Math.round(Math.min(n + groupLength, maxNum)) };
+    n += groupLength + 1;
+  }
+
+  return result;
 }
 
 /***/ }),

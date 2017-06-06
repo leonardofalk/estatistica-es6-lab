@@ -3,30 +3,56 @@ import 'bootstrap-sass/assets/javascripts/bootstrap';
 export function frequencyModule(vals) {
   let media = vals.reduce((a, b) => { return a + b });
   let total = 0, totald = 0, totald2 = 0;
+  let intervals = calcIntervals(vals);
 
-  let tableInfo = vals.map((number) => {
-    let d = Math.abs(number - media);
+  let tableInfo = intervals.map((interval) => {
+    let min = interval.min, max = interval.max;
 
-    total += number;
-    totald += d;
-    totald2 += d ** 2;
-
-    return {number: number, d: d, d2: d ** 2};
+    return {
+      interval: sprintf('%d ├── %d', min, max),
+      frequency: vals.map((n) => {
+        return (n <= max && n >= min) ? 1 : 0;
+      }).reduce((a, b) => {
+        return a + b;
+      }),
+    };
   });
 
-  tableInfo.push({number: total, d: totald, d2: totald2});
+  tableInfo[tableInfo.length] = {
+    interval: '-',
+    frequency: tableInfo.map((num) => {
+      return num.frequency;
+    }).reduce((a, b) => { return a + b; })
+  }
 
   let tableHTML = [];
 
   for (let tableRow of tableInfo) {
     tableHTML.push(sprintf(`
     <tr>
-      <td>%.2f</td>
-      <td>%.2f</td>
-      <td>%.2f</td>
+      <td>%s</td>
+      <td>%d</td>
     </tr>
-    `, tableRow.number, tableRow.d, tableRow.d2));
+    `, tableRow.interval, tableRow.frequency));
   }
 
   document.getElementById('frequency_table').innerHTML = tableHTML.join("\n");
+}
+
+function calcIntervals(vals) {
+  let intervals = vals.slice(0).sort((a, b) => {
+    return parseInt(a || 0, 10) - parseInt(b || 0, 10);
+  });
+  let maxNum = intervals[intervals.length - 1];
+  let minNum = intervals[0];
+  let groupCount  = Math.round(1 + 3.22 * Math.log10(intervals.length));
+  let groupLength = (maxNum - minNum) / groupCount;
+  let result = [], n = minNum;
+
+  for (let i = 0; i < groupCount; i++) {
+    result[i] = {min: Math.round(n), max: Math.round(Math.min(n + groupLength, maxNum))}
+    n += groupLength + 1;
+  }
+
+  return result;
 }
