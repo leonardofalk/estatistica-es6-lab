@@ -19,9 +19,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<label for="entrada">Dados de Entrada:</label>
+				<label for="entrada">Dados de Entrada</label>
 				<textarea class="form-control" id="entrada" rows="6"></textarea>
-				<button class="btn btn-success btn-circle" id="example_run" style="margin-top: 5px;">Números Aleatórios</button>
+				<div class="row" style="margin-top: 10px">
+					<div class="col-md-4">
+						<label for="random_amount">Quantidade</label>
+						<input type="number" min="1" class="form-control" id="random_amount" value="10"></input>
+					</div>
+					<div class="col-md-4">
+						<label for="random_amount">Mínimo</label>
+						<input type="number" min="1" class="form-control" id="min_random_range" value="5"></input>
+					</div>
+					<div class="col-md-4">
+						<label for="random_amount">Máximo</label>
+						<input type="number" min="1" class="form-control" id="max_random_range" value="100"></input>
+					</div>
+					<div class="col-md-12">
+						<button class="btn btn-success btn-block btn-rounded" id="example_run" style="margin-top: 5px;">
+							Gerar Entrada Aleatória
+						</button>
+					</div>
+				</div>
+
 			</div>
 			<div class="col-md-6">
 				<h3 class="text-center">Análise de Dados</h3>
@@ -47,8 +66,11 @@
 				<table class="table freq-table">
 					<thead>
 						<tr>
-							<th>X<sub>i</sub></th>
-							<th>F<sub>i</sub></th>
+							<th data-toggle="tooltip" data-trigger="hover" data-placement="top" data-container="body" title="Grupo de Frequência"><i>X</i><sub>i</sub></th>
+							<th data-toggle="tooltip" data-trigger="hover" data-placement="top" data-container="body" title="Frequência Simples">&fnof;<sub>i</sub></th>
+							<th data-toggle="tooltip" data-trigger="hover" data-placement="top" data-container="body" title="Frequência Relativa">&fnof;<sub>r</sub></th>
+							<th data-toggle="tooltip" data-trigger="hover" data-placement="top" data-container="body" title="Frequência Acumulada"><i>F</i><sub>i</sub></th>
+							<th data-toggle="tooltip" data-trigger="hover" data-placement="top" data-container="body" title="Frequência Acumulada Relativa"><i>F</i><sub>r</sub></th>
 						</tr>
 					</thead>
 					<tbody id="frequency_table">
