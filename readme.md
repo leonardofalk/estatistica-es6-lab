@@ -6,6 +6,10 @@
 
 ```bash
 npm install && npm install -g webpack
-webpack -w
+webpack -p
 # abrir index.html na pasta root
 ```
+
+### Demo
+
+https://leonardofalk.github.io/stats
