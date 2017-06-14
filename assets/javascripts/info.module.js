@@ -5,11 +5,13 @@ export function infoModule(vals) {
 
   document
     .getElementById('conjunto')
-    .innerHTML = sprintf(`<b>S</b> = { %s }`, vals.join(', '));
+    .innerHTML = sprintf(`{ %s }`, vals.join(', '));
+
+  let media = calculaMediaAritmetica(vals)
 
   document
     .getElementById('media_aritmetica')
-    .innerHTML = calculaMediaAritmetica(vals);
+    .innerHTML = media;
 
   document
     .getElementById('media_geometrica')
@@ -22,10 +24,34 @@ export function infoModule(vals) {
   document
     .getElementById('moda')
     .innerHTML = calculaModa(vals);
+
+  let desvios = calculaDesvios(vals, media);
+
+  document
+    .getElementById('desvio_populacional')
+    .innerHTML = sprintf("%.2f", desvios.populacional);
+
+  document
+    .getElementById('desvio_amostral')
+    .innerHTML = sprintf("%.2f", desvios.amostral);
+
+  document
+    .getElementById('coeficiente_variacao')
+    .innerHTML = calculaCoeficienteVariacao(desvios.amostral, media)
+}
+
+function calculaDesvios(vals, media) {
+  let cals = vals.map(num => Math.abs(num - media) ** 2.0 ).reduce((a, b) => a + b );
+
+  return {amostral: (cals / vals.length) ** 0.5, populacional: (cals / (vals.length - 1))  ** 0.5}
+}
+
+function calculaCoeficienteVariacao(desvio, media) {
+  return sprintf(`%.2f`, desvio / media * 100.0);
 }
 
 function calculaMediaAritmetica(vals) {
-  return sprintf(`%.2f <small class="text-muted">= (%s) / %d`, vals.reduce((a, b) => { return a + b; }) / vals.length, vals.join(' + '), vals.length);
+  return sprintf(`%.2f`, vals.reduce((a, b) => { return a + b; }) / vals.length);
 }
 
 function calculaMediaGeometrica(vals) {
@@ -33,14 +59,14 @@ function calculaMediaGeometrica(vals) {
     return a * b;
   });
 
-  return sprintf(`%.2f <small class="text-muted">= (%s) ^ 1/%d`, Math.pow(value, 1 / vals.length), vals.join(' x '), vals.length);
+  return sprintf(`%.2f`, Math.pow(value, 1 / vals.length));
 }
 
 function calculaMediana(vals) {
   let mid = (Math.floor(vals.length / 2) + vals.length % 2) - 1;
 
   if (vals.length % 2 == 0) {
-    return sprintf(`%.2f <small class="text-muted">= %d + %d / 2</small>`, (vals[mid] + vals[mid + 1]) / 2, vals[mid], vals[mid + 1]);
+    return sprintf(`%.2f`, (vals[mid] + vals[mid + 1]) / 2);
   } else {
     return vals[mid];
   }
