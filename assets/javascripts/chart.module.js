@@ -1,4 +1,5 @@
-var _chart1 = null, _chart2 = null;
+var _chart1 = null,
+  _chart2 = null;
 
 export function chartModule(vals) {
   createHistogram(vals);
@@ -13,31 +14,39 @@ function createHistogram(vals) {
       type: 'bar',
       data: {
         labels: vals.map(String),
-        datasets: [{
-          data: vals,
-          backgroundColor: vals.map(function() { return '#3F4FFF' }),
-          borderWidth: 0
-        }]
+        datasets: [
+          {
+            data: vals,
+            backgroundColor: vals.map(function() {
+              return '#3F4FFF'
+            }),
+            borderWidth: 0
+          }
+        ]
       },
       options: {
         legend: {
-          display: false,
+          display: false
         },
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              barPercentage: 1.0,
-              categoryPercentage: 1.0,
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                barPercentage: 1.0,
+                categoryPercentage: 1.0
+              }
             }
-          }],
-          xAxes: [{
-            categoryPercentage: 1,
-            barPercentage: 1,
-            ticks: {
-              beginAtZero: true
+          ],
+          xAxes: [
+            {
+              categoryPercentage: 1,
+              barPercentage: 1,
+              ticks: {
+                beginAtZero: true
+              }
             }
-          }]
+          ]
         }
       }
     });
@@ -56,26 +65,32 @@ function createFrequencyPolygon(vals) {
       type: 'line',
       data: {
         labels: vals.map(String),
-        datasets: [{
-          data: vals,
-          borderColor: '#3F4FFF'
-        }]
+        datasets: [
+          {
+            data: vals,
+            borderColor: '#3F4FFF'
+          }
+        ]
       },
       options: {
         legend: {
-          display: false,
+          display: false
         },
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
             }
-          }],
-          xAxes: [{
-            ticks: {
-              beginAtZero: true
+          ],
+          xAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
             }
-          }]
+          ]
         }
       }
     });

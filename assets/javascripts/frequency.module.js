@@ -3,17 +3,22 @@ import 'bootstrap-sass/assets/javascripts/bootstrap';
 $('[data-toggle=tooltip]').tooltip();
 
 export function frequencyModule(vals) {
-  let totalSum = vals.reduce((a, b) => { return a + b });
+  let totalSum = vals.reduce((a, b) => {
+    return a + b
+  });
   let media = totalSum / vals.length;
   let intervals = calcIntervals(vals);
 
   let tableInfo = intervals.map((interval) => {
-    let min = interval.min, max = interval.max;;
+    let min = interval.min,
+      max = interval.max;;
 
     return {
       interval: sprintf('%03d ├─ %03d', min, max),
       frequency: vals.map((n) => {
-        return (n <= max && n >= min) ? 1 : 0;
+        return (n <= max && n >= min)
+          ? 1
+          : 0;
       }).reduce((a, b) => {
         return a + b;
       })
@@ -22,7 +27,9 @@ export function frequencyModule(vals) {
 
   let totalFrequency = tableInfo.map((num) => {
     return num.frequency;
-  }).reduce((a, b) => { return a + b; });
+  }).reduce((a, b) => {
+    return a + b;
+  });
   let acumulatedFrequency = 0;
 
   tableInfo.map((e) => {
@@ -48,12 +55,7 @@ export function frequencyModule(vals) {
       <td>%d</td>
       <td>%.2f</td>
     </tr>
-    `, tableRow.interval,
-       tableRow.frequency,
-       tableRow.frequencyPercent,
-       tableRow.acumulatedFrequency,
-       tableRow.acumulatedFrequencyPercent
-    ));
+    `, tableRow.interval, tableRow.frequency, tableRow.frequencyPercent, tableRow.acumulatedFrequency, tableRow.acumulatedFrequencyPercent));
   }
 
   tableHTML.push(sprintf(`
@@ -75,12 +77,16 @@ function calcIntervals(vals) {
   });
   let maxNum = intervals[intervals.length - 1];
   let minNum = intervals[0];
-  let groupCount  = Math.round(1 + 3.22 * Math.log10(intervals.length));
-  let groupLength = (maxNum - minNum) / groupCount;
-  let result = [], n = minNum;
+  let groupCount = Math.round(1 + 3.22 * Math.log10(intervals.length));
+  let groupLength = Math.round((maxNum - minNum) / groupCount) + 1;
+  let result = [],
+    n = minNum;
 
   for (let i = 0; i < groupCount; i++) {
-    result[i] = {min: Math.round(n), max: Math.round(Math.min(n + groupLength, maxNum))}
+    result[i] = {
+      min: Math.round(n),
+      max: Math.round(Math.min(n + groupLength, maxNum))
+    }
     n += groupLength + 1;
   }
 
