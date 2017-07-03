@@ -59,6 +59,9 @@ function createHistogram(vals) {
 
 function createFrequencyPolygon(vals) {
   let container = document.getElementById('poligono_frequencia');
+  vals.push(0)
+  vals = arrayReverse(vals)
+  vals.push(0)
 
   if (_chart2 === null) {
     _chart2 = new Chart(container, {
@@ -99,4 +102,14 @@ function createFrequencyPolygon(vals) {
     _chart2 = null;
     createFrequencyPolygon(vals);
   }
+}
+
+function arrayReverse(vals) {
+  let result = []
+
+  for (let x of vals) {
+    result.push(x)
+  }
+
+  return result.reverse();
 }
